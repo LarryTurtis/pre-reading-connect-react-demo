@@ -1,10 +1,17 @@
-import { useState, useEffect } from "react";
-import Color from "./Color";
+import { useState, useEffect } from 'react';
+import Color from './Color';
 
 const API = import.meta.env.VITE_API_URL;
 
 function Colors() {
   const [colors, setColors] = useState([]);
+
+  useEffect(() => {
+    fetch(`${API}/colors`)
+      .then((response) => response.json())
+      .then((responseJSON) => setColors(responseJSON))
+      .catch((error) => console.error(error));
+  });
 
   return (
     <div className="Colors">
